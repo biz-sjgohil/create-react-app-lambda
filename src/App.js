@@ -3,16 +3,9 @@ import logo from "./logo.svg"
 import "./App.css"
 
 class LambdaDemo extends Component {
-
-  const encode = (data) => {
-    return Object.keys(data)
-        .map(key => encodeURIComponent(key) + "=" + encodeURIComponent(data[key]))
-        .join("&");
-  }
-
   constructor(props) {
     super(props)
-    this.state = { loading: false, msg: null, name: "", email: "", message: "" }
+    this.state = { loading: false, msg: null }
   }
 
   handleClick = api => e => {
@@ -37,49 +30,28 @@ class LambdaDemo extends Component {
     )
   }
 }
+
 class ContactForm extends Component {
 
-    /* Here’s the juicy bit for posting the form submission */
-    handleSubmit = e => {
-      fetch("/", {
-        method: "POST",
-        headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        body: encode({ "form-name": "contact", ...this.state })
-      })
-        .then(() => alert("Success!"))
-        .catch(error => alert(error));
-
-      e.preventDefault();
-    };
-
-    handleChange = e => this.setState({ [e.target.name]: e.target.value });
-
-    render() {
-      const { name, email, message } = this.state;
-      return (
-        <form onSubmit={this.handleSubmit}>
-          <input type="hidden" name="form-name" value="contact" />
+  render() {
+    return (
+        <form name="contact" method="post">
+            <input type="hidden" name="form-name" value="contact" />
           <p>
-            <label>
-              Your Name: <input type="text" name="name" value={name} onChange={this.handleChange} />
-            </label>
+            <label>Your Name: <input type="text" name="name"/></label>
           </p>
           <p>
-            <label>
-              Your Email: <input type="email" name="email" value={email} onChange={this.handleChange} />
-            </label>
+            <label>Your Email: <input type="email" name="email"/></label>
           </p>
           <p>
-            <label>
-              Message: <textarea name="message" value={message} onChange={this.handleChange} />
-            </label>
+            <label>Message: <textarea name="message"></textarea></label>
           </p>
           <p>
             <button type="submit">Send</button>
           </p>
         </form>
-      );
-    }
+    )
+  }
 }
 
 class App extends Component {
