@@ -34,7 +34,7 @@ class LambdaDemo extends Component {
 class ContactForm extends Component {
   render() {
     return (
-      <form name="contact" id="FormContactUs" method="POST" data-netlify="true">
+      <form name="contact" netlify>
         <p>
           <label>Your Name: <input type="text" name="name" /></label>   
         </p>
