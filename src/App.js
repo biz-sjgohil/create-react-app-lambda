@@ -32,19 +32,6 @@ class LambdaDemo extends Component {
 }
 
 class ContactForm extends Component {
-    
-  const handleSubmit = (e) => {
-    e.preventDefault()
-    let myForm = document.getElementById('FormContactUs');
-    let formData = new FormData(myForm)
-    fetch('/', {
-      method: 'POST',
-      headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      body: new URLSearchParams(formData).toString()
-    }).then(() => console.log('Data submitted successfully.')).catch((error) =>
-      alert(error))
-  }
-
   render() {
     return (
       <form name="contact" id="FormContactUs" method="POST" data-netlify="true">
