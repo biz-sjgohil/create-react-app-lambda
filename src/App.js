@@ -31,6 +31,46 @@ class LambdaDemo extends Component {
   }
 }
 
+class ContactForm extends Component {
+    
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    let myForm = document.getElementById('FormContactUs');
+    let formData = new FormData(myForm)
+    fetch('/', {
+      method: 'POST',
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: new URLSearchParams(formData).toString()
+    }).then(() => console.log('Data submitted successfully.')).catch((error) =>
+      alert(error))
+  }
+
+  render() {
+    return (
+      <form name="contact" id="FormContactUs" method="POST" data-netlify="true">
+        <p>
+          <label>Your Name: <input type="text" name="name" /></label>   
+        </p>
+        <p>
+          <label>Your Email: <input type="email" name="email" /></label>
+        </p>
+        <p>
+          <label>Your Role: <select name="role[]" multiple>
+            <option value="staff-member">Staff Member</option>
+            <option value="customer">Customer</option>
+          </select></label>
+        </p>
+        <p>
+          <label>Message: <textarea name="message"></textarea></label>
+        </p>
+        <p>
+          <button type="submit">Send</button>
+        </p>
+      </form>
+    )
+  }
+}
+
 class App extends Component {
   render() {
     return (
@@ -38,10 +78,12 @@ class App extends Component {
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
           <p>
-            Hello SJ, Edit <code>src/App.js</code> and save to reload.
+            Hello SJ, How are you today?
           </p>
           <LambdaDemo />
         </header>
+        <h2>Contact Us</h2>
+        <ContactForm />
       </div>
     )
   }
